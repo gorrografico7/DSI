@@ -27,9 +27,9 @@ const PrivateRoute = ({ element,access }) => {
     return <div>Loading...</div>;  
   }
 
-  if (!tableAccess[rol] || !tableAccess[rol].includes(tabla)) {
-    return <Navigate to="/access-denied" replace />;
-  }
+  // if (!tableAccess[rol] || !tableAccess[rol].includes(tabla)) {
+  //   return <Navigate to="/access-denied" replace />;
+  // }
 
   return (
       <div className="h-screen w-screen flex">

@@ -9,7 +9,13 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
  
     const login = async (email) => {
-        sessionStorage.setItem('email',email);
+        const exist=true;
+        if(exist){ 
+            sessionStorage.setItem('email',email);
+            return true;
+        }else{
+            return false;
+        }
     };
 
   const logout = () => {

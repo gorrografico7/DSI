@@ -22,7 +22,11 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Login attempt:', formData);
-    login(formData.email);
+    if(login(formData.email)){
+      navigate('/dashboard');
+    }else{
+      alert('datos incorrectos.');
+    }
   
   };
 

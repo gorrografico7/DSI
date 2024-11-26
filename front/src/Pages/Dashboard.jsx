@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../Context/AuthContext';
 
 function Dashboard(){
     const [currentMonth, setCurrentMonth] = useState(new Date()); 
-
+    const [email,setEmail] = useState(null);
+    const {logout} = useAuth();
     const getDaysInMonth = (month, year) => {
         const date = new Date(year, month, 1);
         const days = [];
@@ -17,19 +19,24 @@ function Dashboard(){
         const date = new Date(year, month, 1);
         return date.getDay(); 
     };
-
+    useEffect(()=>{
+        setEmail(sessionStorage.getItem('email'));
+    },[])
     const daysInMonth = getDaysInMonth(currentMonth.getMonth(), currentMonth.getFullYear());
     const firstDay = getFirstDayOfMonth(currentMonth.getMonth(), currentMonth.getFullYear());
-
+    const firstletter =async ()=> {
+        let flemail = await email;
+        return flemail.slice(0,1).toUpperCase();
+    }
     return(
         <div className="w-full h-screen relative bg-white overflow-auto">
             <div className="w-full h-20 absolute top-0 left-0 bg-white border-b border-black/40 flex justify-between items-center px-8">
                 <div className="flex items-center">
                     <div className="w-16 h-16 bg-[#2fb5b1] rounded-full flex items-center justify-center">
-                        <span className="text-white text-3xl ">A</span>
+                        <span className="text-white text-3xl ">{firstletter()}</span>
                     </div>
                 </div>
-                <div className="text-[#2fb5b1] text-xl font-bold">Cerrar Sesion</div>
+                <div  onClick={()=>{logout()}} className="text-[#2fb5b1] text-xl font-bold">Cerrar Sesion</div>
             </div>
 
             <div className="container mx-auto px-4 pt-24">
